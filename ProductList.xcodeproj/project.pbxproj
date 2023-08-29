@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A9AAC4E92A9E52C2004E7802 /* BackendProductModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AAC4E82A9E52C2004E7802 /* BackendProductModels.swift */; };
 		A9C1E36B2A9D00A10047C9DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C1E36A2A9D00A10047C9DA /* AppDelegate.swift */; };
 		A9C1E3742A9D00A10047C9DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9C1E3732A9D00A10047C9DA /* Assets.xcassets */; };
 		A9C1E3772A9D00A10047C9DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9C1E3752A9D00A10047C9DA /* LaunchScreen.storyboard */; };
@@ -15,9 +16,11 @@
 		A9C1E3872A9D01DD0047C9DA /* ProductListScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C1E3842A9D01DD0047C9DA /* ProductListScreenViewController.swift */; };
 		A9C1E3882A9D01DD0047C9DA /* ProductListScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C1E3852A9D01DD0047C9DA /* ProductListScreenPresenter.swift */; };
 		A9C1E3892A9D01DD0047C9DA /* ProductListScreenProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C1E3862A9D01DD0047C9DA /* ProductListScreenProtocols.swift */; };
+		A9C1E38C2A9D051C0047C9DA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C1E38B2A9D051C0047C9DA /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A9AAC4E82A9E52C2004E7802 /* BackendProductModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendProductModels.swift; sourceTree = "<group>"; };
 		A9C1E3672A9D00A10047C9DA /* ProductList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9C1E36A2A9D00A10047C9DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9C1E3732A9D00A10047C9DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -28,6 +31,7 @@
 		A9C1E3842A9D01DD0047C9DA /* ProductListScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListScreenViewController.swift; sourceTree = "<group>"; };
 		A9C1E3852A9D01DD0047C9DA /* ProductListScreenPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListScreenPresenter.swift; sourceTree = "<group>"; };
 		A9C1E3862A9D01DD0047C9DA /* ProductListScreenProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListScreenProtocols.swift; sourceTree = "<group>"; };
+		A9C1E38B2A9D051C0047C9DA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A9AAC4E72A9E528D004E7802 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A9AAC4E82A9E52C2004E7802 /* BackendProductModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		A9C1E35E2A9D00A10047C9DA = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +72,7 @@
 		A9C1E3692A9D00A10047C9DA /* ProductList */ = {
 			isa = PBXGroup;
 			children = (
+				A9C1E38A2A9D04CB0047C9DA /* Services */,
 				A9C1E3832A9D01BC0047C9DA /* ProductListModule */,
 				A9C1E37E2A9D01360047C9DA /* Navigation */,
 				A9C1E36A2A9D00A10047C9DA /* AppDelegate.swift */,
@@ -82,11 +95,20 @@
 		A9C1E3832A9D01BC0047C9DA /* ProductListModule */ = {
 			isa = PBXGroup;
 			children = (
+				A9AAC4E72A9E528D004E7802 /* Models */,
 				A9C1E3852A9D01DD0047C9DA /* ProductListScreenPresenter.swift */,
 				A9C1E3862A9D01DD0047C9DA /* ProductListScreenProtocols.swift */,
 				A9C1E3842A9D01DD0047C9DA /* ProductListScreenViewController.swift */,
 			);
 			path = ProductListModule;
+			sourceTree = "<group>";
+		};
+		A9C1E38A2A9D04CB0047C9DA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A9C1E38B2A9D051C0047C9DA /* NetworkService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,10 +183,12 @@
 			files = (
 				A9C1E3872A9D01DD0047C9DA /* ProductListScreenViewController.swift in Sources */,
 				A9C1E3882A9D01DD0047C9DA /* ProductListScreenPresenter.swift in Sources */,
+				A9AAC4E92A9E52C2004E7802 /* BackendProductModels.swift in Sources */,
 				A9C1E36B2A9D00A10047C9DA /* AppDelegate.swift in Sources */,
 				A9C1E3892A9D01DD0047C9DA /* ProductListScreenProtocols.swift in Sources */,
 				A9C1E3812A9D01B40047C9DA /* MainRouter.swift in Sources */,
 				A9C1E3822A9D01B40047C9DA /* AssemblyBuilder.swift in Sources */,
+				A9C1E38C2A9D051C0047C9DA /* NetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

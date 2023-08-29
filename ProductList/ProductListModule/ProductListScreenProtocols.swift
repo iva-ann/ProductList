@@ -7,5 +7,10 @@
 
 import Foundation
 
-protocol ProductListScreenPresenterInput {}
-protocol ProductListScreenPresenterOutput: AnyObject {}
+protocol ProductListScreenPresenterInput {
+    func getProductListInfo()
+    
+}
+protocol ProductListScreenPresenterOutput: AnyObject {
+    func setUpPresenter(_ presenter: ProductListScreenPresenterInput)
+}

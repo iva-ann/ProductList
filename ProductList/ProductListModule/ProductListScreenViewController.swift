@@ -9,11 +9,20 @@ import UIKit
 
 final class ProductListScreenViewController: UIViewController {
     
-    var presenter: ProductListScreenPresenterInput?
+    private var presenter: ProductListScreenPresenterInput?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialSetup()
+    }
+    
+    private func initialSetup() {
+        presenter?.getProductListInfo()
     }
 }
 
-extension ProductListScreenViewController: ProductListScreenPresenterOutput {}
+extension ProductListScreenViewController: ProductListScreenPresenterOutput {
+    func setUpPresenter(_ presenter: ProductListScreenPresenterInput) {
+        self.presenter = presenter
+    }
+}
