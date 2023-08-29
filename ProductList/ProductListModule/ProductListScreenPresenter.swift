@@ -25,7 +25,7 @@ final class ProductListScreenPresenter {
         let productModels = productListModel.advertisements.map({ $0 })
         self.productModels = productModels
         print(productModels)
-//       передать вью
+        view?.reloadProductList()
     }
 }
 
@@ -41,5 +41,9 @@ extension ProductListScreenPresenter: ProductListScreenPresenterInput {
                 print(error)
             }
         }
+    }
+    
+    func getProductsCount() -> Int {
+        return productModels.count
     }
 }
