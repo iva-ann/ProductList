@@ -9,8 +9,9 @@ import UIKit
 
 final class ProductCollectionViewCell: UICollectionViewCell {
     enum Constants {
-        static let titleTextSize: CGFloat = 20
-        static let subtitleTextSize: CGFloat = 10
+        static let titleTextSize: CGFloat = 18
+        static let subtitleTextSize: CGFloat = 13
+        static let imageCornerRadius: CGFloat = 6
     }
     private let productImageView: UIImageView = .init()
     private let prodactNameLabel: UILabel = .init()
@@ -29,8 +30,17 @@ final class ProductCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
+    func configure(with model: ProductModel) {
+        self.productImageView.image = model.image
+        self.prodactNameLabel.text = model.title
+        self.productPriceLabel.text = model.price
+        self.productLocationLabel.text = model.location
+        self.productCreatedDateLabel.text = model.createdDate
+    }
+    
     private func setupViews() {
         setupLabels()
+        setupImageView()
         setupstackView()
         
         stackView.addArrangedSubviews([
@@ -45,21 +55,21 @@ final class ProductCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupLabels() {
-        prodactNameLabel.setupWith(size: Constants.titleTextSize, weight: .regular, textColor: .black, textAlignment: .left)
+        prodactNameLabel.setupWith(size: Constants.titleTextSize, weight: .light, textColor: .black, textAlignment: .left)
         productPriceLabel.setupWith(size: Constants.titleTextSize, weight: .medium, textColor: .black, textAlignment: .left)
         productLocationLabel.setupWith(size: Constants.subtitleTextSize, weight: .regular, textColor: .lightGray, textAlignment: .left)
         productCreatedDateLabel.setupWith(size: Constants.subtitleTextSize, weight: .regular, textColor: .lightGray, textAlignment: .left)
-        
-        prodactNameLabel.text = "Name"
-        productPriceLabel.text = "productPriceLabel"
-        productLocationLabel.text = "productLocationLabel"
-        productCreatedDateLabel.text = "productCreatedDateLabel"
     }
     
     private func setupstackView() {
         stackView.alignment = .fill
         stackView.axis = .vertical
         stackView.spacing = 5
+    }
+    
+    private func setupImageView() {
+        productImageView.layer.cornerRadius = Constants.imageCornerRadius
+        productImageView.layer.masksToBounds = true
     }
     
     private func makeConstraints() {

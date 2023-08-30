@@ -5,7 +5,7 @@
 //  Created by Анна Иванова on 28.08.2023.
 //
 
-import Foundation
+import UIKit
 
 final class ProductListScreenPresenter {
     
@@ -13,7 +13,7 @@ final class ProductListScreenPresenter {
     private weak var view: ProductListScreenPresenterOutput?
     private let networkService: NetworkServiceProtocol = NetworkService.shared
     
-    private var productModels: [ProductBackendModel] = []
+    private var productModels: [ProductModel] = []
     
     init(router: MainRouterProtocol?,
          view: ProductListScreenPresenterOutput?) {
@@ -22,10 +22,33 @@ final class ProductListScreenPresenter {
     }
     
     private func displayProductListInfo(_ productListModel: BackendProductModels) {
-        let productModels = productListModel.advertisements.map({ $0 })
+        let productModels = getProductModels(from: productListModel)
         self.productModels = productModels
         print(productModels)
         view?.reloadProductList()
+    }
+    
+    private func getProductModels(from productListModel: BackendProductModels) -> [ProductModel] {
+        let productBackendModels = productListModel.advertisements.map({ $0 })
+        var productModels: [ProductModel] = []
+        
+        productBackendModels.forEach { model in
+            //            DispatchQueue.global().async { [weak self] in
+            guard let url = URL(string: model.imageURL) else { return }
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    let productModel = ProductModel(id: model.id,
+                                                    title: model.title,
+                                                    price: model.price,
+                                                    image: image,
+                                                    location: model.location,
+                                                    createdDate: model.createdDate)
+                    productModels.append(productModel)
+                }
+                //                        }
+            }
+        }
+        return productModels
     }
 }
 
@@ -33,9 +56,9 @@ extension ProductListScreenPresenter: ProductListScreenPresenterInput {
     func getProductListInfo() {
         NetworkService.shared.fetchProducList { [weak self] result in
             switch result {
-            case .success(let productModels):
-                if let productModels = productModels {
-                self?.displayProductListInfo(productModels)
+            case .success(let productListModel):
+                if let productListModel = productListModel {
+                    self?.displayProductListInfo(productListModel)
                 }
             case.failure(let error):
                 print(error)
@@ -45,5 +68,9 @@ extension ProductListScreenPresenter: ProductListScreenPresenterInput {
     
     func getProductsCount() -> Int {
         return productModels.count
+    }
+    
+    func getProductModel(for index: Int) -> ProductModel {
+        return productModels[index]
     }
 }

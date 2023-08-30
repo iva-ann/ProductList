@@ -106,7 +106,9 @@ extension ProductListScreenViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.identifier, for: indexPath)
-        guard let productCell = cell as? ProductCollectionViewCell else { return cell}
+        guard let productCell = cell as? ProductCollectionViewCell,
+              let currentModel = presenter?.getProductModel(for: indexPath.row) else { return cell}
+        productCell.configure(with: currentModel)
         return productCell
     }
 }

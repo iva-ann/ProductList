@@ -10,6 +10,7 @@ import Foundation
 protocol ProductListScreenPresenterInput {
     func getProductListInfo()
     func getProductsCount() -> Int
+    func getProductModel(for index: Int) -> ProductModel
 }
 protocol ProductListScreenPresenterOutput: AnyObject {
     func setUpPresenter(_ presenter: ProductListScreenPresenterInput)
