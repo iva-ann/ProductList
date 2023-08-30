@@ -9,6 +9,10 @@ import UIKit
 import SnapKit
 
 final class ProductListScreenViewController: UIViewController {
+    enum Constants {
+        static let horizontalSectionInset: CGFloat = 10
+    }
+    
     // MARK: - Private properties
     private var presenter: ProductListScreenPresenterInput?
     private var collectionView: UICollectionView
@@ -34,7 +38,7 @@ final class ProductListScreenViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        configureView()
+        setupViews()
         makeConstraints()
     }
     
@@ -59,9 +63,9 @@ final class ProductListScreenViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: true)
     }
     
-    private func configureView() {
-        configureStackView()
-        configureLabel()
+    private func setupViews() {
+        setupStackView()
+        setupLabel()
         
         mainStackView.addArrangedSubviews([
             titleLabel,
@@ -70,16 +74,17 @@ final class ProductListScreenViewController: UIViewController {
         self.view.addSubview(mainStackView)
     }
     
-    private func configureStackView() {
+    private func setupStackView() {
         mainStackView.axis = .vertical
         mainStackView.distribution = .fill
-     }
+    }
     
-    private func configureLabel() {
+    private func setupLabel() {
         titleLabel.text = "Список продуктов"
-        titleLabel.textAlignment = .center
-        titleLabel.textColor = .black
-        titleLabel.font = .systemFont(ofSize: 20, weight: .medium)
+        titleLabel.setupWith(size: 20,
+                             weight: .medium,
+                             textColor: .black,
+                             textAlignment: .center)
     }
     
     private func makeConstraints() {
@@ -108,6 +113,18 @@ extension ProductListScreenViewController: UICollectionViewDataSource {
 // MARK: - Extension UICollectionViewDelegate
 extension ProductListScreenViewController: UICollectionViewDelegate {
     
+}
+
+extension ProductListScreenViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let flowayout = collectionViewLayout as? UICollectionViewFlowLayout
+        flowayout?.sectionInset.right = Constants.horizontalSectionInset
+        flowayout?.sectionInset.left = Constants.horizontalSectionInset
+
+        let space: CGFloat = (flowayout?.minimumInteritemSpacing ?? 0.0) + (flowayout?.sectionInset.left ?? 0.0) + (flowayout?.sectionInset.right ?? 0.0)
+        let size: CGFloat = (collectionView.frame.size.width - space) / 2.0
+        return CGSize(width: size, height: size * 1.5)
+    }
 }
 
 // MARK: - Extension ProductListScreenPresenterOutput
