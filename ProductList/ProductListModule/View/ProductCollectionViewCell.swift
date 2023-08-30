@@ -13,6 +13,7 @@ final class ProductCollectionViewCell: UICollectionViewCell {
         static let subtitleTextSize: CGFloat = 13
         static let imageCornerRadius: CGFloat = 6
     }
+    
     private let productImageView: UIImageView = .init()
     private let prodactNameLabel: UILabel = .init()
     private let productPriceLabel: UILabel = .init()
