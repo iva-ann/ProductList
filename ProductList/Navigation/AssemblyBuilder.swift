@@ -17,4 +17,14 @@ final class AssemblyBuilder {
         productListViewController.setUpPresenter(presenter)
         return productListViewController
     }
+    
+    func createProductDetailsScreen(router: MainRouterProtocol,
+                                    for productModel: ProductModel) -> ProductDetailsViewController {
+        let productDetailsViewController = ProductDetailsViewController()
+        let presenter = ProductDetailsPresenter(router: router,
+                                                productModel: productModel,
+                                                view: productDetailsViewController)
+        productDetailsViewController.presenter = presenter
+        return productDetailsViewController
+    }
 }

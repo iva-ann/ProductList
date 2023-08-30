@@ -114,7 +114,9 @@ extension ProductListScreenViewController: UICollectionViewDataSource {
 }
 // MARK: - Extension UICollectionViewDelegate
 extension ProductListScreenViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter?.didSelectProduct(at: indexPath.row)
+    }
 }
 
 extension ProductListScreenViewController: UICollectionViewDelegateFlowLayout {

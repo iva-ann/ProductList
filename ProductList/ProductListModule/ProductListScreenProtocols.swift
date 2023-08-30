@@ -11,6 +11,7 @@ protocol ProductListScreenPresenterInput {
     func getProductListInfo()
     func getProductsCount() -> Int
     func getProductModel(for index: Int) -> ProductModel
+    func didSelectProduct(at index: Int)
 }
 protocol ProductListScreenPresenterOutput: AnyObject {
     func setUpPresenter(_ presenter: ProductListScreenPresenterInput)

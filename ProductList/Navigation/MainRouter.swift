@@ -7,7 +7,9 @@
 
 import UIKit
 
-protocol MainRouterProtocol: AnyObject {}
+protocol MainRouterProtocol: AnyObject {
+    func openProducDetailsScreeen(for productModel: ProductModel)
+}
 
 final class MainRouter {
     
@@ -24,4 +26,11 @@ final class MainRouter {
     }
 }
 
-extension MainRouter: MainRouterProtocol {}
+extension MainRouter: MainRouterProtocol {
+    func openProducDetailsScreeen(for productModel: ProductModel) {
+        let productDetailsViewController = assemblyBuilder.createProductDetailsScreen(router: self,
+                                                                                      for: productModel)
+        
+        navigationController.pushViewController(productDetailsViewController, animated: true)
+    }
+}

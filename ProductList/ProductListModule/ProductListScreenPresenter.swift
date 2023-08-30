@@ -33,7 +33,6 @@ final class ProductListScreenPresenter {
         var productModels: [ProductModel] = []
         
         productBackendModels.forEach { model in
-            //            DispatchQueue.global().async { [weak self] in
             guard let url = URL(string: model.imageURL) else { return }
             if let data = try? Data(contentsOf: url) {
                 if let image = UIImage(data: data) {
@@ -45,7 +44,6 @@ final class ProductListScreenPresenter {
                                                     createdDate: model.createdDate)
                     productModels.append(productModel)
                 }
-                //                        }
             }
         }
         return productModels
@@ -72,5 +70,10 @@ extension ProductListScreenPresenter: ProductListScreenPresenterInput {
     
     func getProductModel(for index: Int) -> ProductModel {
         return productModels[index]
+    }
+    
+    func didSelectProduct(at index: Int) {
+        let selectedProduct = productModels[index]
+        router?.openProducDetailsScreeen(for: selectedProduct)
     }
 }
