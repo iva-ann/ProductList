@@ -13,6 +13,7 @@
 		A94959F02A9FB33F001B01EB /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94959EF2A9FB33F001B01EB /* ProductDetailsViewController.swift */; };
 		A94959F22A9FB34C001B01EB /* ProductDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94959F12A9FB34C001B01EB /* ProductDetailsPresenter.swift */; };
 		A94959F42A9FB35B001B01EB /* ProductDetailsPresenterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94959F32A9FB35B001B01EB /* ProductDetailsPresenterProtocols.swift */; };
+		A971C4182AA0E54B00511192 /* UIActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971C4172AA0E54B00511192 /* UIActivityIndicatorView.swift */; };
 		A9AAC4E92A9E52C2004E7802 /* BackendProductModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AAC4E82A9E52C2004E7802 /* BackendProductModels.swift */; };
 		A9AAC4EE2A9E581D004E7802 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AAC4ED2A9E581D004E7802 /* ProductCollectionViewCell.swift */; };
 		A9AAC4F12A9E5BD0004E7802 /* UICollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AAC4F02A9E5BD0004E7802 /* UICollectionViewCell.swift */; };
@@ -37,6 +38,7 @@
 		A94959EF2A9FB33F001B01EB /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		A94959F12A9FB34C001B01EB /* ProductDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsPresenter.swift; sourceTree = "<group>"; };
 		A94959F32A9FB35B001B01EB /* ProductDetailsPresenterProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsPresenterProtocols.swift; sourceTree = "<group>"; };
+		A971C4172AA0E54B00511192 /* UIActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActivityIndicatorView.swift; sourceTree = "<group>"; };
 		A9AAC4E82A9E52C2004E7802 /* BackendProductModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendProductModels.swift; sourceTree = "<group>"; };
 		A9AAC4ED2A9E581D004E7802 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		A9AAC4F02A9E5BD0004E7802 /* UICollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewCell.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				A9AAC4F02A9E5BD0004E7802 /* UICollectionViewCell.swift */,
 				A9AAC4F22A9E6417004E7802 /* UIStackView.swift */,
 				A94959EA2A9F9DE8001B01EB /* UILabel.swift */,
+				A971C4172AA0E54B00511192 /* UIActivityIndicatorView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				A9AAC4E92A9E52C2004E7802 /* BackendProductModels.swift in Sources */,
 				A9C1E36B2A9D00A10047C9DA /* AppDelegate.swift in Sources */,
 				A94959F42A9FB35B001B01EB /* ProductDetailsPresenterProtocols.swift in Sources */,
+				A971C4182AA0E54B00511192 /* UIActivityIndicatorView.swift in Sources */,
 				A9C1E3892A9D01DD0047C9DA /* ProductListScreenProtocols.swift in Sources */,
 				A9C1E3812A9D01B40047C9DA /* MainRouter.swift in Sources */,
 				A94959F22A9FB34C001B01EB /* ProductDetailsPresenter.swift in Sources */,

@@ -13,6 +13,7 @@ final class ProductDetailsViewController: UIViewController {
         static let priceTextSize: CGFloat = 40
         static let adressTextSize: CGFloat = 18
         static let infoTextSize: CGFloat = 18
+        static let activityIndicatorSize: CGFloat = 60
     }
     
     private let productImageView: UIImageView = .init()
@@ -32,6 +33,8 @@ final class ProductDetailsViewController: UIViewController {
     private let addressStackView: UIStackView = .init()
     private let contactsStackView: UIStackView = .init()
     
+    private let activityIndicator = UIActivityIndicatorView()
+    
     var presenter: ProductDetailsPresenterProtocolInput?
     
     override func viewDidLoad() {
@@ -48,13 +51,23 @@ final class ProductDetailsViewController: UIViewController {
     
     private func initialSetup() {
         self.view.backgroundColor = .white
+        setupActivityIndicator()
+    }
+    
+    private func setupActivityIndicator() {
+        self.view.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints {
+            $0.center.equalTo(self.view.snp.center)
+            $0.width.height.equalTo(Constants.activityIndicatorSize)
+            
+        }
+        activityIndicator.initialSetup()
+        activityIndicator.startAnimating()
     }
     
     private func setupViews() {
         setupStackViews()
         setupLabels()
-        
-        productImageView.backgroundColor = .lightGray
         
         mainStackView.addArrangedSubviews([
             headerStackView,
@@ -130,15 +143,21 @@ final class ProductDetailsViewController: UIViewController {
 extension ProductDetailsViewController: ProductDetailsPresenterProtocolOutput {
     func configure(with model: ProductModel) {
         DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            
+            self.productImageView.image = model.image
+            self.productImageView.backgroundColor = .lightGray
+            
             self.prodactNameLabel.text = model.title
             self.productPriceLabel.text = model.price
+            self.productCreatedDateLabel.text = model.createdDate
+            
             self.productLocationLabel.text = model.location
             self.productAddressLabel.text = model.address
+            
             self.productDescriptionLabel.text = model.description
             self.productPhoneLabel.text = model.phoneNumber
             self.productEmailLabel.text = model.email
-            self.productCreatedDateLabel.text = model.createdDate
-            self.productImageView.image = model.image
         }
     }
 }

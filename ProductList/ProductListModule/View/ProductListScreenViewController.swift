@@ -11,13 +11,15 @@ import SnapKit
 final class ProductListScreenViewController: UIViewController {
     enum Constants {
         static let horizontalSectionInset: CGFloat = 10
+        static let activityIndicatorSize: CGFloat = 60
     }
     
     // MARK: - Private properties
     private var presenter: ProductListScreenPresenterInput?
     private var collectionView: UICollectionView
     private let titleLabel: UILabel = UILabel()
-    private lazy var mainStackView: UIStackView = UIStackView()
+    private let mainStackView: UIStackView = UIStackView()
+    private let activityIndicator = UIActivityIndicatorView()
     
     // MARK: - Initialization
     
@@ -42,11 +44,16 @@ final class ProductListScreenViewController: UIViewController {
         makeConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     // MARK: - Private methods
     private func initialSetup() {
         self.view.backgroundColor = .white
         presenter?.getProductListInfo()
         setupCollectionView()
+        setupActivityIndicator()
     }
     
     private func setupCollectionView() {
@@ -61,6 +68,17 @@ final class ProductListScreenViewController: UIViewController {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
         layout.scrollDirection = UICollectionView.ScrollDirection.vertical
         collectionView.setCollectionViewLayout(layout, animated: true)
+    }
+    
+    private func setupActivityIndicator() {
+        self.view.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints {
+            $0.center.equalTo(self.view.snp.center)
+            $0.width.height.equalTo(Constants.activityIndicatorSize)
+            
+        }
+        activityIndicator.initialSetup()
+        activityIndicator.startAnimating()
     }
     
     private func setupViews() {
@@ -139,6 +157,7 @@ extension ProductListScreenViewController: ProductListScreenPresenterOutput {
     
     func reloadProductList() {
         DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
             self.collectionView.reloadData()
         }
     }
