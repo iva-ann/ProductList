@@ -26,9 +26,6 @@ final class NetworkService: NetworkServiceProtocol {
     
     static var shared = NetworkService()
     private let urlSession: URLSession = URLSession.shared
-    //    private let productListUrl = URL(string: "https://www.avito.st/s/interns-ios/main-page.json")
-    
-    private let endUrlComponent: String = ".json"
     
     func fetchProducList(completionHandler: @escaping (Result<BackendProductModels?, Error>) -> Void) {
         guard let url = getURL(for: .mainPage) else { return }

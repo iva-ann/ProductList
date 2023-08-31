@@ -20,6 +20,7 @@ final class ProductListScreenViewController: UIViewController {
     private let titleLabel: UILabel = UILabel()
     private let mainStackView: UIStackView = UIStackView()
     private let activityIndicator = UIActivityIndicatorView()
+    private let errorView: ErrorView = ErrorView()
     
     // MARK: - Initialization
     
@@ -54,6 +55,14 @@ final class ProductListScreenViewController: UIViewController {
         presenter?.getProductListInfo()
         setupCollectionView()
         setupActivityIndicator()
+        
+        errorView.tappedButtonCompletion = { [weak self] in
+            DispatchQueue.main.async {
+                self?.errorView.isHidden = true
+                self?.activityIndicator.startAnimating()
+            }
+            self?.presenter?.getProductListInfo()
+        }
     }
     
     private func setupCollectionView() {
@@ -90,6 +99,9 @@ final class ProductListScreenViewController: UIViewController {
             collectionView
         ])
         self.view.addSubview(mainStackView)
+        
+        self.view.addSubview(errorView)
+        errorView.isHidden = true
     }
     
     private func setupStackView() {
@@ -111,6 +123,12 @@ final class ProductListScreenViewController: UIViewController {
             $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             $0.left.right.equalToSuperview()
             $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+        }
+        
+        errorView.snp.makeConstraints {
+            $0.center.equalTo(self.view.snp.center)
+            $0.width.equalTo(self.view.frame.width * 0.7)
+            $0.height.equalTo(self.view.frame.height * 0.1)
         }
     }
     
@@ -142,7 +160,7 @@ extension ProductListScreenViewController: UICollectionViewDelegateFlowLayout {
         let flowayout = collectionViewLayout as? UICollectionViewFlowLayout
         flowayout?.sectionInset.right = Constants.horizontalSectionInset
         flowayout?.sectionInset.left = Constants.horizontalSectionInset
-
+        
         let space: CGFloat = (flowayout?.minimumInteritemSpacing ?? 0.0) + (flowayout?.sectionInset.left ?? 0.0) + (flowayout?.sectionInset.right ?? 0.0)
         let size: CGFloat = (collectionView.frame.size.width - space) / 2.0
         return CGSize(width: size, height: size * 1.5)
@@ -151,7 +169,7 @@ extension ProductListScreenViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - Extension ProductListScreenPresenterOutput
 extension ProductListScreenViewController: ProductListScreenPresenterOutput {
-    func setUpPresenter(_ presenter: ProductListScreenPresenterInput) {
+    func setupPresenter(_ presenter: ProductListScreenPresenterInput) {
         self.presenter = presenter
     }
     
@@ -159,6 +177,13 @@ extension ProductListScreenViewController: ProductListScreenPresenterOutput {
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
             self.collectionView.reloadData()
+        }
+    }
+    
+    func displayErrorView() {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.errorView.isHidden = false
         }
     }
 }

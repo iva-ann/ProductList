@@ -14,6 +14,7 @@ protocol ProductListScreenPresenterInput {
     func didSelectProduct(at index: Int)
 }
 protocol ProductListScreenPresenterOutput: AnyObject {
-    func setUpPresenter(_ presenter: ProductListScreenPresenterInput)
+    func setupPresenter(_ presenter: ProductListScreenPresenterInput)
     func reloadProductList()
+    func displayErrorView()
 }

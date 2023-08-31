@@ -14,7 +14,7 @@ final class AssemblyBuilder {
         let productListViewController = ProductListScreenViewController()
         let presenter = ProductListScreenPresenter(router: router,
                                                    view: productListViewController)
-        productListViewController.setUpPresenter(presenter)
+        productListViewController.setupPresenter(presenter)
         return productListViewController
     }
     

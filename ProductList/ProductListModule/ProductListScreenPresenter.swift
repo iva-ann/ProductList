@@ -59,6 +59,7 @@ extension ProductListScreenPresenter: ProductListScreenPresenterInput {
                 }
             case.failure(let error):
                 print(error)
+                self?.view?.displayErrorView()
             }
         }
     }
