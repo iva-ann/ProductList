@@ -7,6 +7,10 @@
 
 import Foundation
 
-protocol ProductDetailsPresenterProtocolInput {}
+protocol ProductDetailsPresenterProtocolInput {
+    func getProductDetailsInfo()
+}
 
-protocol ProductDetailsPresenterProtocolOutput: AnyObject {}
+protocol ProductDetailsPresenterProtocolOutput: AnyObject {
+    func configure(with model: ProductModel)
+}

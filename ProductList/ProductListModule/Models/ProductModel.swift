@@ -14,4 +14,9 @@ struct ProductModel {
     let image: UIImage
     let location: String
     let createdDate: String
+    
+    var address: String?
+    var description: String?
+    var email: String?
+    var phoneNumber: String?
 }

@@ -24,7 +24,6 @@ final class ProductListScreenPresenter {
     private func displayProductListInfo(_ productListModel: BackendProductModels) {
         let productModels = getProductModels(from: productListModel)
         self.productModels = productModels
-        print(productModels)
         view?.reloadProductList()
     }
     
@@ -52,7 +51,7 @@ final class ProductListScreenPresenter {
 
 extension ProductListScreenPresenter: ProductListScreenPresenterInput {
     func getProductListInfo() {
-        NetworkService.shared.fetchProducList { [weak self] result in
+        NetworkService.shared.fetchProducList() { [weak self] result in
             switch result {
             case .success(let productListModel):
                 if let productListModel = productListModel {

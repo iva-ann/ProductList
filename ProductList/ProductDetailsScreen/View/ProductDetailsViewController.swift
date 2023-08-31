@@ -37,6 +37,7 @@ final class ProductDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
+        presenter?.getProductDetailsInfo()
     }
     
     override func viewDidLayoutSubviews() {
@@ -53,18 +54,9 @@ final class ProductDetailsViewController: UIViewController {
         setupStackViews()
         setupLabels()
         
-        productImageView.backgroundColor = .green
-        prodactNameLabel.text = "prodactNameLabel"
-        productPriceLabel.text = "productPriceLabel"
-        productLocationLabel.text = "productLocationLabel"
-        productAddressLabel.text = "productAddressLabel"
-        productDescriptionLabel.text = "productDescriptionLabel"
-        productPhoneLabel.text = "productPhoneLabel"
-        productEmailLabel.text = "productEmailLabel"
-        productCreatedDateLabel.text = "productCreatedDateLabel"
+        productImageView.backgroundColor = .lightGray
         
         mainStackView.addArrangedSubviews([
-            //            productImageView,
             headerStackView,
             addressStackView,
             productDescriptionLabel,
@@ -113,7 +105,7 @@ final class ProductDetailsViewController: UIViewController {
         productLocationLabel.setupWith(size: Constants.adressTextSize, weight: .regular, textColor: .darkGray, textAlignment: .left)
         productAddressLabel.setupWith(size: Constants.adressTextSize, weight: .regular, textColor: .darkGray, textAlignment: .left)
         
-        
+        productDescriptionLabel.numberOfLines = 0
         productDescriptionLabel.setupWith(size: Constants.infoTextSize, weight: .regular, textColor: .darkGray, textAlignment: .left)
         productPhoneLabel.setupWith(size: Constants.infoTextSize, weight: .regular, textColor: .darkGray, textAlignment: .left)
         productEmailLabel.setupWith(size: Constants.infoTextSize, weight: .regular, textColor: .darkGray, textAlignment: .left)
@@ -129,10 +121,24 @@ final class ProductDetailsViewController: UIViewController {
         
         mainStackView.snp.makeConstraints {
             $0.top.equalTo(productImageView.snp.bottom).offset(15)
-            $0.left.right.equalToSuperview().offset(15)
+            $0.left.right.equalToSuperview().inset(15)
             $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-25)
         }
     }
 }
 
-extension ProductDetailsViewController: ProductDetailsPresenterProtocolOutput {}
+extension ProductDetailsViewController: ProductDetailsPresenterProtocolOutput {
+    func configure(with model: ProductModel) {
+        DispatchQueue.main.async {
+            self.prodactNameLabel.text = model.title
+            self.productPriceLabel.text = model.price
+            self.productLocationLabel.text = model.location
+            self.productAddressLabel.text = model.address
+            self.productDescriptionLabel.text = model.description
+            self.productPhoneLabel.text = model.phoneNumber
+            self.productEmailLabel.text = model.email
+            self.productCreatedDateLabel.text = model.createdDate
+            self.productImageView.image = model.image
+        }
+    }
+}
